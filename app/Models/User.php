@@ -11,7 +11,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = 'user';
-
+    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'email',
@@ -33,8 +33,13 @@ class User extends Authenticatable
         return $this->role === 'manager';
     }
 
-    public function isAdmin()
+    public function isResepsionis()
     {
-        return $this->role === 'admin';
+        return $this->role === 'resepsionis';
+    }
+
+    public function reservasi()
+    {
+        return $this->hasMany(ModelReservasi::class, 'id_resepsionis');
     }
 }
