@@ -16,6 +16,7 @@ return new class extends Migration
             $table->enum('status_ketersediaan', ['booking', 'occupied', 'cleaning', 'ready']);
             $table->integer('harga'); 
             $table->unsignedBigInteger('tipe_kamar_id'); 
+            $table->integer('no_kamar');
             $table->timestamps();
 
             $table->foreign('tipe_kamar_id')->references('id')->on('tipe_kamar')->onDelete('cascade');

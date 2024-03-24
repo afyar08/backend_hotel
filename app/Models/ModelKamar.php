@@ -12,7 +12,9 @@ class ModelKamar extends Model
     protected $fillable = [
         'status_ketersediaan',
         'harga',
-        'tipe_kamar_id'
+        'tipe_kamar_id',
+        'no_kamar'
+
     ];
 
     public function tipeKamar()
