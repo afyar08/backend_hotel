@@ -11,7 +11,9 @@ class ModelTipeKamar extends Model
     protected $table = 'tipe_kamar';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama',
+        'bed_tipe',
+        'nama_tipe',
+        'kapasitas_ruangan',
         'deskripsi'
     ];
 
