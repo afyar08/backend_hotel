@@ -25,6 +25,8 @@ return new class extends Migration
             $table->foreign('id_tamu_online')->references('id')->on('online_guests')->onDelete('cascade');
             $table->foreign('id_tamu_call')->references('id')->on('call_guests')->onDelete('cascade');
             $table->foreignId('id_resepsionis')->nullable()->constrained('receptionists');
+            $table->foreignId('id_laundry')->nullable()->constrained('layanan_laundry');
+            $table->foreignId('id_restorant')->nullable()->constrained('layanan_restoran');
             $table->timestamps();
             
             // Membuat unique constraint untuk memastikan hanya satu di antara id_tamu_call atau id_tamu_online yang diisi
