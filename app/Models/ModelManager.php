@@ -3,24 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
-//use Illuminate\Database\Eloquent\Relations\HasMany;
-//use Illuminate\Database\Eloquent\Relations\HasOne;
-//use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Sanctum\HasApiTokens;
 
-class ModelTamu extends Authenticatable
+class ModelManager extends Model
 {
     use HasFactory, HasApiTokens;
-    protected $table = 'tamu';
+    protected $table = 'manager';
     protected $primaryKey= 'id';
     protected $fillable=
     [
         'nama',
         'email',
         'password',
-        'no_telp'
     ];
 
     protected $hidden = [
@@ -31,8 +26,5 @@ class ModelTamu extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    // public function reservasi():HasOne
-    // {
 
-    // }
 }

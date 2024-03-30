@@ -26,19 +26,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function isManager()
-    {
-        return $this->role === 'manager';
-    }
-
-    public function isResepsionis()
-    {
-        return $this->role === 'resepsionis';
-    }
-
-    public function reservasi()
-    {
-        return $this->hasMany(ModelReservasi::class, 'id_resepsionis');
-    }
 }

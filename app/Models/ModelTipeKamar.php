@@ -14,10 +14,10 @@ class ModelTipeKamar extends Model
         'bed_tipe',
         'nama_tipe',
         'kapasitas_ruangan',
-        'deskripsi'
+        'deskripsi',
     ];
 
-    public function kamar()
+    public function kamars()
     {
         return $this->hasMany(ModelKamar::class, 'tipe_kamar_id');
     }
