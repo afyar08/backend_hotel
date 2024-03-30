@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
             // UsersTableSeeder::class,
             // TipeKamarSeeder::class,
             // KamarTableSeeder::class, 
-            // TamuTableSeeder::class,
+            // LaundryTableSeeder::class,
             // ReservasiTableSeeder::class,
-            // LaundryTableSeeder::class,  
+              
         ]);
     }
 }

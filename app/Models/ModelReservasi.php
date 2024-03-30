@@ -20,6 +20,8 @@ class ModelReservasi extends Model
         'id_kamar',
         'id_tamu',
         'id_resepsionis',
+        'id_laundry', // tambahkan id_laundry
+        'id_restorant', // tambahkan id_restorant
     ];
 
     public function kamar()
@@ -56,5 +58,16 @@ class ModelReservasi extends Model
     public function resepsionis()
     {
         return $this->belongsTo(ModelReceptionist::class, 'id_resepsionis');
+    }
+
+    public function laundry()
+    {
+        return $this->belongsTo(ModelLaundry::class, 'id_laundry');
+    }
+
+    // Tambahkan relasi untuk restorant
+    public function restorant()
+    {
+        return $this->belongsTo(ModelRestorant::class, 'id_restorant');
     }
 }
