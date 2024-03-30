@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ModelRestorant extends Model
 {
     use HasFactory;
-    protected $table = 'layanan_restorant';
+    protected $table = 'layanan_restoran';
     protected $primaryKey = 'id';
-    protected $fillable = 
-    [
+    protected $fillable = [
+        'jenis_makanan',
+        'harga',
         'deskripsi',
-        'jadwal',
-        'id_kamar'
     ];
 }

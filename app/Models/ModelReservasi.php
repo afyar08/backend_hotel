@@ -10,21 +10,64 @@ class ModelReservasi extends Model
     use HasFactory;
     protected $table = 'reservasi';
     protected $primaryKey = 'id';
-    protected $fillable = 
-    [
+    protected $fillable = [
+        'tgl_check_in',
+        'tgl_check_out',
+        'detail_tamu',
+        'pembayaran',
+        'total_bayar',
+        'status_pembayaran',
         'id_kamar',
         'id_tamu',
         'id_resepsionis',
-        'tgl_check_in',
-        'tgl_check_out',
-        'total_bayar',
-        'pembayaran',
-        'status_pembayaran',
-        'detail_tamu'
+        'id_laundry', // tambahkan id_laundry
+        'id_restorant', // tambahkan id_restorant
     ];
 
+    public function kamar()
+    {
+        return $this->belongsTo(ModelKamar::class, 'id_kamar');
+    }
+
+    // Relasi dengan model guest
+    public function guest()
+{
+    // Periksa apakah ada ID tamu online
+    if ($this->id_tamu) {
+        $onlineGuest = ModelOnlineGuest::find($this->id_tamu);
+        if ($onlineGuest) {
+            return $this->belongsTo(ModelOnlineGuest::class, 'id_tamu');
+        }
+    }
+
+    // Periksa apakah ada ID tamu call
+    if ($this->id_tamu) {
+        $callGuest = ModelCallGuest::find($this->id_tamu);
+        if ($callGuest) {
+            return $this->belongsTo(ModelCallGuest::class, 'id_tamu');
+        }
+    }
+
+    // Jika tidak ada ID tamu online atau ID tamu call, kembalikan null
+    return null;
+}
+
+
+
+    // Relasi dengan model ModelResepsionis
     public function resepsionis()
     {
-        return $this->belongsTo(User::class, 'id_resepsionis');
+        return $this->belongsTo(ModelReceptionist::class, 'id_resepsionis');
+    }
+
+    public function laundry()
+    {
+        return $this->belongsTo(ModelLaundry::class, 'id_laundry');
+    }
+
+    // Tambahkan relasi untuk restorant
+    public function restorant()
+    {
+        return $this->belongsTo(ModelRestorant::class, 'id_restorant');
     }
 }

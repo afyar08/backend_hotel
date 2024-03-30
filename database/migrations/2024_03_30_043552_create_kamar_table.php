@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('kamar', function (Blueprint $table) {
             $table->id();
-            $table->enum('status_ketersediaan', ['booking', 'occupied', 'cleaning', 'ready']);
-            $table->integer('harga'); 
-            $table->unsignedBigInteger('tipe_kamar_id'); 
-            $table->integer('no_kamar');
+            $table->string('status_kamar');
+            $table->decimal('harga', 10, 2);
+            $table->string('no_kamar');
+            $table->foreignId('tipe_kamar_id')->constrained('tipe_kamar');
             $table->timestamps();
-
-            $table->foreign('tipe_kamar_id')->references('id')->on('tipe_kamar')->onDelete('cascade');
         });
     }
 

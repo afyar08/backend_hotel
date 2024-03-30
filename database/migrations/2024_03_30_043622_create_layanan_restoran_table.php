@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tamu', function (Blueprint $table) {
+        Schema::create('layanan_restoran', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string("no_telp");
-            $table->timestamp('email_verified_at')->nullable();
-            $table->rememberToken();
+            $table->string('jenis_makanan');
+            $table->decimal('harga', 10, 2);
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tamu');
+        Schema::dropIfExists('layanan_restoran');
     }
 };

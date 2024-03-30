@@ -10,11 +10,10 @@ class ModelKamar extends Model
     protected $table = 'kamar';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'status_ketersediaan',
+        'status_kamar',
         'harga',
+        'no_kamar',
         'tipe_kamar_id',
-        'no_kamar'
-
     ];
 
     public function tipeKamar()

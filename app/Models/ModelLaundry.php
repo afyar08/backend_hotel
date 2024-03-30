@@ -10,9 +10,9 @@ class ModelLaundry extends Model
     use HasFactory;
     protected $table = 'layanan_laundry';
     protected $primaryKey = 'id';
-    protected $fillable = 
-    [
+    protected $fillable = [
+        'berat',
+        'harga',
         'deskripsi',
-        'id_kamar'
     ];
 }

@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('layanan_laundry', function (Blueprint $table) {
             $table->id();
-            $table->text('deskripsi');
-            $table->unsignedBigInteger('id_reservasi')->nullable(); // Kolom ini seharusnya merujuk ke tabel reservasi
+            $table->decimal('berat', 5, 2);
+            $table->decimal('harga', 10, 2);
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
-
-            // Perbaikan: Menggunakan id_reservasi sebagai foreign key
-            $table->foreign('id_reservasi')->references('id')->on('reservasi')->onDelete('cascade');
         });
     }
 
