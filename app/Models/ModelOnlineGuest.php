@@ -9,7 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 class ModelOnlineGuest extends Model
 {
     use HasFactory, HasApiTokens;
-    protected $table = 'online_guest';
+    protected $table = 'online_guests';
     protected $primaryKey= 'id';
     protected $fillable=
     [

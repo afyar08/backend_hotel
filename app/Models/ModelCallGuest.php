@@ -9,7 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 class ModelCallGuest extends Model
 {
     use HasFactory, HasApiTokens;
-    protected $table = 'call_guest';
+    protected $table = 'call_guests';
     protected $primaryKey= 'id';
     protected $fillable=
     [
