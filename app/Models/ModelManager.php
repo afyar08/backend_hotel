@@ -9,7 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 class ModelManager extends Model
 {
     use HasFactory, HasApiTokens;
-    protected $table = 'manager';
+    protected $table = 'managers';
     protected $primaryKey= 'id';
     protected $fillable=
     [

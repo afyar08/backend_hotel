@@ -24,6 +24,8 @@ Route::get('/example', function () {
 });
 
 Route::prefix('admin')->group(function () {
-    Route::post('/create_manager', [AdminManagerController::class, 'create']);
-    
+    Route::post('/create_manager', [AdminManagerController::class, 'create_akun']);
+    Route::get('/read_manager', [AdminManagerController::class, 'read_akun']);
+    Route::put('/update_manager/{id}', [AdminManagerController::class, 'update_akun']);
+    Route::delete('/delete_manager/{id}', [AdminManagerController::class, 'delete_akun']);
 });
