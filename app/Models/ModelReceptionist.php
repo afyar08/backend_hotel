@@ -9,7 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 class ModelReceptionist extends Model
 {
     use HasFactory, HasApiTokens;
-    protected $table = 'receptionist';
+    protected $table = 'receptionists';
     protected $primaryKey= 'id';
     protected $fillable=
     [
@@ -18,7 +18,7 @@ class ModelReceptionist extends Model
     ];
 
     protected $hidden = [
-        'password',
+        // 'password',
         'remember_token',
     ];
 
