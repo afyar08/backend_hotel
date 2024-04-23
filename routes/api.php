@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminManagerController;
+use App\Http\Controllers\ReceptionistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +29,12 @@ Route::prefix('admin')->group(function () {
     Route::get('/read_manager', [AdminManagerController::class, 'read_akun']);
     Route::put('/update_manager/{id}', [AdminManagerController::class, 'update_akun']);
     Route::delete('/delete_manager/{id}', [AdminManagerController::class, 'delete_akun']);
+});
+
+Route::prefix('receptionist')->group(function () {
+    Route::post('/create_receptionist', [ReceptionistController::class, 'create_akun']);
+    Route::post('/auth_receptionist', [ReceptionistController::class, 'login']);
+    //Route::get('/read_manager', [AdminManagerController::class, 'read_akun']);
+    // Route::put('/update_manager/{id}', [AdminManagerController::class, 'update_akun']);
+    // Route::delete('/delete_manager/{id}', [AdminManagerController::class, 'delete_akun']);
 });
