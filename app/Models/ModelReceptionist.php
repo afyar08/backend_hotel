@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class ModelReceptionist extends Model
+class ModelReceptionist extends Authenticatable
 {
     use HasFactory, HasApiTokens;
     protected $table = 'receptionists';

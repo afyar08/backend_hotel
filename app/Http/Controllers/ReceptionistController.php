@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Crypt;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ModelReceptionist;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ReceptionistController extends Controller
 {
@@ -15,15 +17,13 @@ class ReceptionistController extends Controller
         try {
             // Validasi request
             $validatedData = $request->validate([
-                'id' => 'required',
                 'username' => 'required|string',
                 'password' => 'required|min:8',
             ]);
 
             // Buat instance ModelManager baru
-            $passwordEncrypted = Crypt::encryptString($validatedData['password']);
+            $passwordEncrypted = bcrypt($validatedData['password']);
             $receptionist = new ModelReceptionist([
-                'id' => $validatedData['id'],
                 'username' => $validatedData['username'],
                 'password' => $passwordEncrypted,
             ]);
@@ -38,12 +38,15 @@ class ReceptionistController extends Controller
     }
 
    function login(Request $request) {
-       try {
-            $receptionist = ModelReceptionist::get()->where('username', $request->username);
-            return response()->json(['message' => $receptionist], 201);
-       } catch (\Exception $e) {
-            return response()->json(['message' => 'Gagal membuat akun receptionist', 'error' => $e->getMessage()], 500);
-       }
+    if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){
+        $receptionist = Auth::user();
+        $success['token'] = Str::random(60);
+        // $success = Str::random(60);
+        return response()->json(['success' => $success], 200);
+    }
+    else{
+        return response()->json(['error' => 'Unauthorised'], 401);
+    }
    }
 }
 
