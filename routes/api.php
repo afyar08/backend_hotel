@@ -24,13 +24,6 @@ Route::get('/example', function () {
     return response()->json(['message' => 'This is an example API endpoint']);
 });
 
-<<<<<<< HEAD
-Route::prefix('admin')->group(function () {
-    Route::post('/create_manager', [AdminManagerController::class, 'create_akun']);
-    Route::get('/read_manager', [AdminManagerController::class, 'read_akun']);
-    Route::put('/update_manager/{id}', [AdminManagerController::class, 'update_akun']);
-    Route::delete('/delete_manager/{id}', [AdminManagerController::class, 'delete_akun']);
-=======
 
 Route::prefix('receptionist')->group(function () {
     Route::post('/create_receptionist', [ReceptionistController::class, 'create_akun']);
@@ -38,5 +31,4 @@ Route::prefix('receptionist')->group(function () {
     //Route::get('/read_manager', [AdminManagerController::class, 'read_akun']);
     // Route::put('/update_manager/{id}', [AdminManagerController::class, 'update_akun']);
     // Route::delete('/delete_manager/{id}', [AdminManagerController::class, 'delete_akun']);
->>>>>>> main
 });

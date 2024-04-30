@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB; // Menambahkan import namespace DB
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -27,14 +27,12 @@ return new class extends Migration
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('no_telp');
-            $table->enum('kategori', ['ON', 'BP']); // Kategori: Online (ON) atau By Phone (BP)
-            $table->string('password')->nullable(); // Password akan diisi jika kategori adalah 'ON'
+            $table->enum('kategori', ['ON', 'BP']);
+            $table->string('password')->nullable();
             $table->timestamps();
         });
 
-        // Add a database level constraint to enforce the email rule
         DB::statement('ALTER TABLE guests ADD CONSTRAINT email_required_if_online CHECK (kategori = \'BP\' OR (kategori = \'ON\' AND email IS NOT NULL));');
-
 
         Schema::create('receptionists', function (Blueprint $table) {
             $table->id();
@@ -64,9 +62,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('receptionists');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('receptionists');
+        Schema::dropIfExists('guests');
+        Schema::dropIfExists('users');
     }
 };
