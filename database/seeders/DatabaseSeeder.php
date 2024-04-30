@@ -16,12 +16,10 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call([
-            // UsersTableSeeder::class,
-            // TipeKamarSeeder::class,
-            // KamarTableSeeder::class, 
-            // LaundryTableSeeder::class,
-            // ReservasiTableSeeder::class,
-              
+            UsersTableSeeder::class,
+            TipeKamarSeeder::class,
+            KamarTableSeeder::class, 
+            ReservasiTableSeeder::class,
         ]);
     }
 }
