@@ -6,12 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\ModelGuest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\QueryException;
 
 class GuestController extends Controller
 {
     // Registrasi guest baru
-    public function register(Request $request)
-    {
+    // Registrasi guest baru
+public function register(Request $request)
+{
+    try {
         // Validasi input dari request
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
@@ -19,19 +24,31 @@ class GuestController extends Controller
             'kategori' => 'required|in:ON,BP',
             'email' => [
                 'required',
-                Rule::unique('guests')->when(function ($request) {
-                    return $request->kategori === 'ON';
-                }),
                 'email',
+                Rule::unique('guests')->where(function ($query) use ($request) {
+                    return $query->where('kategori', $request->kategori);
+                }),
             ],
             'password' => 'required_if:kategori,ON|string|min:6',
         ]);
 
+        // Hash password
+        $validatedData['password'] = Hash::make($validatedData['password']);
         // Buat guest baru
         $guest = ModelGuest::create($validatedData);
 
         return response()->json(['message' => 'Registrasi berhasil', 'guest' => $guest]);
+    } catch (ValidationException $e) {
+        // Tangani kesalahan validasi
+        return response()->json(['message' => 'Validasi gagal', 'errors' => $e->errors()], 422);
+    } catch (QueryException $e) {
+        // Tangani kesalahan kueri (misalnya, kesalahan unik)
+        return response()->json(['message' => 'Registrasi gagal', 'error' => $e->getMessage()], 500);
+    } catch (\Exception $e) {
+        // Tangani kesalahan umum
+        return response()->json(['message' => 'Terjadi kesalahan internal', 'error' => $e->getMessage()], 500);
     }
+}
 
     // Login guest
     public function login(Request $request)
