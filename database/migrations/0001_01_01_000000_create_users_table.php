@@ -33,7 +33,8 @@ return new class extends Migration
         });
 
         // Add a database level constraint to enforce the email rule
-        DB::statement('ALTER TABLE guests ADD CONSTRAINT email_required_if_online CHECK (kategori = "BP" OR (kategori = "ON" AND email IS NOT NULL));');
+        DB::statement('ALTER TABLE guests ADD CONSTRAINT email_required_if_online CHECK (kategori = \'BP\' OR (kategori = \'ON\' AND email IS NOT NULL));');
+
 
         Schema::create('receptionists', function (Blueprint $table) {
             $table->id();
