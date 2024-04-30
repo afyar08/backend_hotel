@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB; // Menambahkan import namespace DB
 
 return new class extends Migration
 {
@@ -21,34 +22,23 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('managers', function (Blueprint $table) {
+        Schema::create('guests', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('no_telp');
+            $table->enum('kategori', ['ON', 'BP']); // Kategori: Online (ON) atau By Phone (BP)
+            $table->string('password')->nullable(); // Password akan diisi jika kategori adalah 'ON'
             $table->timestamps();
         });
+
+        // Add a database level constraint to enforce the email rule
+        DB::statement('ALTER TABLE guests ADD CONSTRAINT email_required_if_online CHECK (kategori = "BP" OR (kategori = "ON" AND email IS NOT NULL));');
 
         Schema::create('receptionists', function (Blueprint $table) {
             $table->id();
             $table->string('username');
             $table->string('password');
-            $table->timestamps();
-        });
-
-        Schema::create('online_guests', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('no_telp');
-            $table->timestamps();
-        });
-
-        Schema::create('call_guests', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->string('no_telp');
             $table->timestamps();
         });
 
@@ -74,10 +64,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('managers');
         Schema::dropIfExists('receptionists');
-        Schema::dropIfExists('online_guests');
-        Schema::dropIfExists('call_guests');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }
