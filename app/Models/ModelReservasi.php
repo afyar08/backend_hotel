@@ -18,10 +18,7 @@ class ModelReservasi extends Model
         'total_bayar',
         'status_pembayaran',
         'id_kamar',
-        'id_tamu',
         'id_resepsionis',
-        'id_laundry', // tambahkan id_laundry
-        'id_restorant', // tambahkan id_restorant
     ];
 
     public function kamar()
@@ -29,45 +26,10 @@ class ModelReservasi extends Model
         return $this->belongsTo(ModelKamar::class, 'id_kamar');
     }
 
-    // Relasi dengan model guest
-    public function guest()
-{
-    // Periksa apakah ada ID tamu online
-    if ($this->id_tamu) {
-        $onlineGuest = ModelOnlineGuest::find($this->id_tamu);
-        if ($onlineGuest) {
-            return $this->belongsTo(ModelOnlineGuest::class, 'id_tamu');
-        }
-    }
-
-    // Periksa apakah ada ID tamu call
-    if ($this->id_tamu) {
-        $callGuest = ModelCallGuest::find($this->id_tamu);
-        if ($callGuest) {
-            return $this->belongsTo(ModelCallGuest::class, 'id_tamu');
-        }
-    }
-
-    // Jika tidak ada ID tamu online atau ID tamu call, kembalikan null
-    return null;
-}
-
-
-
+    
     // Relasi dengan model ModelResepsionis
     public function resepsionis()
     {
         return $this->belongsTo(ModelReceptionist::class, 'id_resepsionis');
-    }
-
-    public function laundry()
-    {
-        return $this->belongsTo(ModelLaundry::class, 'id_laundry');
-    }
-
-    // Tambahkan relasi untuk restorant
-    public function restorant()
-    {
-        return $this->belongsTo(ModelRestorant::class, 'id_restorant');
     }
 }
