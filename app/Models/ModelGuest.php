@@ -8,7 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class ModelGuest extends Model
+
+class ModelGuest extends Authenticatable
 {
     use HasFactory, HasApiTokens;
 

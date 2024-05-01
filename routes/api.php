@@ -15,26 +15,28 @@ use App\Http\Controllers\ReceptionistController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::get('/example', function () {
+//     return response()->json(['message' => 'This is an example API endpoint']);
+// });
+
+Route::middleware('auth:guest')->group(function () {
+    Route::post('/logout', [GuestController::class, 'logout']);
 });
 
-Route::get('/example', function () {
-    return response()->json(['message' => 'This is an example API endpoint']);
+Route::prefix('guest')->group(function () {
+    Route::post('/register', [GuestController::class, 'register']);
+    Route::post('/login', [GuestController::class, 'login']);  
+});
+
+Route::middleware('auth:receptionist')->group(function () {
+    // Rute untuk resepsionis
 });
 
 Route::prefix('receptionist')->group(function () {
     Route::post('/create_receptionist', [ReceptionistController::class, 'create_akun']);
     Route::post('/auth_receptionist', [ReceptionistController::class, 'login']);
 });
-
-Route::prefix('guest')->group(function () {
-    Route::post('/register', [GuestController::class, 'register']);
-    Route::post('/login', [GuestController::class, 'login']);
-    Route::post('/logout', [GuestController::class, 'logout'])->middleware('auth:api');
-});
-
-// Route::middleware('auth:sanctum')->group( function () {
-//     Route::resource('products', ProductController::class);
-// });

@@ -11,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 
+
 class GuestController extends Controller
 {
     // Registrasi guest baru
@@ -55,21 +56,35 @@ public function register(Request $request)
 }
 
     // Login guest
-    public function login(Request $request)
-    {
+// Login guest
+public function login(Request $request)
+{
+    try {
         // Validasi input dari request
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
-        // Lakukan autentikasi
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Login berhasil', 'user' => auth()->user()]);
+        // Catat data yang diterima
+        Log::info('Data yang diterima untuk login:', $request->only('email', 'password'));
+
+        // Lakukan autentikasi menggunakan guard 'guest'
+        if (Auth::guard('guest')->attempt($request->only('email', 'password'))) {
+            return response()->json(['message' => 'Login berhasil', 'user' => auth()->guard('guest')->user()]);
         } else {
+            // Jika login gagal, catat pesan gagal login
+            Log::info('Login gagal untuk email: ' . $request->email);
             return response()->json(['message' => 'Login gagal'], 401);
         }
+    } catch (\Exception $e) {
+        // Tangani kesalahan umum
+        Log::error('Terjadi kesalahan saat login: ' . $e->getMessage());
+        return response()->json(['message' => 'Terjadi kesalahan saat login'], 500);
     }
+}
+
+
 
     // Logout guest
     public function logout(Request $request)
