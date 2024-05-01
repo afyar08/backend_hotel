@@ -20,7 +20,9 @@ class ModelGuest extends Authenticatable
         'email',
         'no_telp',
         'kategori',
-        'password'
+        'password',
+        'activation_token', // Tambahkan kolom activation_token
+        'status', // Tambahkan kolom status
     ];
 
     protected $hidden = [
