@@ -8,7 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class ModelGuest extends Model
+
+class ModelGuest extends Authenticatable
 {
     use HasFactory, HasApiTokens;
 
@@ -19,7 +20,9 @@ class ModelGuest extends Model
         'email',
         'no_telp',
         'kategori',
-        'password'
+        'password',
+        'activation_token', // Tambahkan kolom activation_token
+        'status', // Tambahkan kolom status
     ];
 
     protected $hidden = [

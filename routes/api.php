@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminManagerController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ReceptionistController;
 
 /*
@@ -15,20 +15,28 @@ use App\Http\Controllers\ReceptionistController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::get('/example', function () {
+//     return response()->json(['message' => 'This is an example API endpoint']);
+// });
+
+Route::middleware('auth:guest')->group(function () {
+    Route::post('/logout', [GuestController::class, 'logout']);
 });
 
-Route::get('/example', function () {
-    return response()->json(['message' => 'This is an example API endpoint']);
+Route::prefix('guest')->group(function () {
+    Route::post('/register', [GuestController::class, 'register']);
+    Route::post('/login', [GuestController::class, 'login']);  
 });
 
+Route::middleware('auth:receptionist')->group(function () {
+    // Rute untuk resepsionis
+});
 
 Route::prefix('receptionist')->group(function () {
     Route::post('/create_receptionist', [ReceptionistController::class, 'create_akun']);
     Route::post('/auth_receptionist', [ReceptionistController::class, 'login']);
-    //Route::get('/read_manager', [AdminManagerController::class, 'read_akun']);
-    // Route::put('/update_manager/{id}', [AdminManagerController::class, 'update_akun']);
-    // Route::delete('/delete_manager/{id}', [AdminManagerController::class, 'delete_akun']);
 });

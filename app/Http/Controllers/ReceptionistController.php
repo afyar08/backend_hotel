@@ -37,16 +37,22 @@ class ReceptionistController extends Controller
         }
     }
 
-   function login(Request $request) {
-    if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){
-        $receptionist = Auth::user();
-        $success['token'] = Str::random(60);
-        // $success = Str::random(60);
-        return response()->json(['success' => $success], 200);
+    public function login(Request $request) {
+        // Lakukan percobaan otentikasi menggunakan metode Auth::attempt dengan menggunakan guard 'receptionist'
+        if(Auth::guard('receptionist')->attempt(['username' => $request->username, 'password' => $request->password])){
+            // Jika otentikasi berhasil, ambil informasi pengguna
+            $receptionist = Auth::guard('receptionist')->user();
+            
+            // Buat token acak untuk pengguna yang berhasil login
+            $success['token'] = Str::random(60);
+            
+            // Kirim respons JSON dengan token dan status HTTP 200 (OK)
+            return response()->json(['success' => $success], 200);
+        } else {
+            // Jika otentikasi gagal, kirim respons JSON dengan pesan kesalahan dan status HTTP 401 (Unauthorized)
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
     }
-    else{
-        return response()->json(['error' => 'Unauthorised'], 401);
-    }
-   }
+    
 }
 
