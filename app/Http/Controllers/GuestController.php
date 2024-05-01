@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class GuestController extends Controller
 {
@@ -17,6 +18,9 @@ class GuestController extends Controller
 public function register(Request $request)
 {
     try {
+
+        Log::info('Data yang diterima untuk registrasi:', $request->all());
+
         // Validasi input dari request
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
