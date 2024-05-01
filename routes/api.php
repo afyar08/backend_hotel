@@ -34,3 +34,7 @@ Route::prefix('guest')->group(function () {
     Route::post('/login', [GuestController::class, 'login']);
     Route::post('/logout', [GuestController::class, 'logout'])->middleware('auth:api');
 });
+
+// Route::middleware('auth:sanctum')->group( function () {
+//     Route::resource('products', ProductController::class);
+// });
