@@ -39,4 +39,5 @@ Route::middleware('auth:receptionist')->group(function () {
 Route::prefix('receptionist')->group(function () {
     Route::post('/create_receptionist', [ReceptionistController::class, 'create_akun']);
     Route::post('/auth_receptionist', [ReceptionistController::class, 'login']);
+    Route::post('/logout_receptionist', [ReceptionistController::class, 'logout']);
 });

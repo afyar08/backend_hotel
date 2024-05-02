@@ -53,6 +53,11 @@ class ReceptionistController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
     }
+
+    public function logout(Request $request){
+        Auth::logout();
+        return response()->json(['success' => 'anda berhasil logout', 200]);
+    }
     
 }
 
