@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tipe_kamar', function (Blueprint $table) {
             $table->id();
             $table->string('bed_tipe');
-            $table->string('nama_tipe');
+            $table->string('nama_tipe')->unique();
             $table->integer('kapasitas_ruangan');
             $table->text('deskripsi')->nullable();
             $table->timestamps();
