@@ -11,6 +11,7 @@ class ModelKamar extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'status_kamar',
+        'status_reservasi',
         'harga',
         'no_kamar',
         'tipe_kamar_id',

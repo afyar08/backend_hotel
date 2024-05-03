@@ -17,6 +17,16 @@ class ModelTipeKamar extends Model
         'deskripsi',
     ];
 
+    // Aturan validasi unik untuk kolom 'nama_tipe'
+    public static $rules = [
+        'nama_tipe' => 'unique:tipe_kamar,nama_tipe',
+    ];
+
+    // Aturan validasi unik di atas menggunakan format pesan berikut
+    public static $messages = [
+        'nama_tipe.unique' => 'Nama tipe kamar sudah ada dalam database.',
+    ];
+
     public function kamars()
     {
         return $this->hasMany(ModelKamar::class, 'tipe_kamar_id');
