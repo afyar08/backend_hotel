@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ReceptionistController;
+use App\Http\Controllers\TipeKamarController;
+use App\Http\Controllers\KamarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +43,6 @@ Route::prefix('receptionist')->group(function () {
     Route::post('/auth_receptionist', [ReceptionistController::class, 'login']);
     Route::post('/logout_receptionist', [ReceptionistController::class, 'logout']);
 });
+
+Route::get('/tipe_kamar', [TipeKamarController::class, 'get']);
+Route::get('/kamar', [KamarController::class, 'get']);
