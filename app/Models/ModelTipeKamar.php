@@ -26,9 +26,10 @@ class ModelTipeKamar extends Model
     public static $messages = [
         'nama_tipe.unique' => 'Nama tipe kamar sudah ada dalam database.',
     ];
+    
 
     public function kamars()
     {
-        return $this->hasMany(ModelKamar::class, 'tipe_kamar_id');
+        return $this->belongsTo(ModelKamar::class, 'tipe_kamar_id', 'id');
     }
 }
