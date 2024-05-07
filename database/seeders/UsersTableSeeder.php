@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
         // Seeder untuk tabel guests
         DB::table('guests')->insert([
             'nama' => 'John Doe',
-            'email' => 'john@example.com',
+            'email' => 'john@gmail.com',
             'no_telp' => '1234567890',
             'kategori' => 'ON',
             'password' => Hash::make('password'),
@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
 
         DB::table('guests')->insert([
             'nama' => 'Jane Smith',
-            'email' => 'jane@example.com',
+            'email' => 'jane@gmail.com',
             'no_telp' => '987654321',
             'kategori' => 'BP',
             'password' => null,

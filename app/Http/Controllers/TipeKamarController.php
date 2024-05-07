@@ -8,6 +8,7 @@ use App\Models\ModelTipeKamar;
 
 class TipeKamarController extends Controller
 {
+    // ini untuk mendapatkan semua data dari model tipe data kamar
     public function get() {
         dd(ModelTipeKamar::all());
 
