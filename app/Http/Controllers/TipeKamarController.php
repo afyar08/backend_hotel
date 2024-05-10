@@ -9,7 +9,24 @@ use App\Models\ModelTipeKamar;
 class TipeKamarController extends Controller
 {
     public function get() {
-        $tipeKamar = ModelTipeKamar::all();
-        return response()->json($tipeKamar);
+        // Mengambil semua tipe kamar beserta harga dari kamar terkait
+        $tipeKamar = ModelTipeKamar::with('kamars')->get();
+
+        // Menyusun respons JSON
+        $response = [];
+        foreach ($tipeKamar as $tipe) {
+            $response[] = [
+                'id' => $tipe->id,
+                'bed_tipe' => $tipe->bed_tipe,
+                'nama_tipe' => $tipe->nama_tipe,
+                'kapasitas_ruangan' => $tipe->kapasitas_ruangan,
+                'gambar' => $tipe->gambar,
+                'deskripsi' => $tipe->deskripsi,
+                'harga' => $tipe->kamars->avg('harga') // Mengambil rata-rata harga dari kamar-kamar terkait
+            ];
+        }
+
+        // Mengembalikan respons JSON
+        return response()->json($response);
     }
 }
