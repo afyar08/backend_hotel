@@ -15,6 +15,7 @@ class ModelTipeKamar extends Model
         'nama_tipe',
         'kapasitas_ruangan',
         'deskripsi',
+        'gambar',
     ];
 
     // Aturan validasi unik untuk kolom 'nama_tipe'

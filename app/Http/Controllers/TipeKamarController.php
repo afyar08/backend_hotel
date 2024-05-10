@@ -9,7 +9,7 @@ use App\Models\ModelTipeKamar;
 class TipeKamarController extends Controller
 {
     public function get() {
-        dd(ModelTipeKamar::all());
-
+        $tipeKamar = ModelTipeKamar::all();
+        return response()->json($tipeKamar);
     }
 }
