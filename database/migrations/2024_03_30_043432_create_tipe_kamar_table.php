@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('bed_tipe');
             $table->string('nama_tipe')->unique();
             $table->integer('kapasitas_ruangan');
+            $table->string('gambar');
             $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
