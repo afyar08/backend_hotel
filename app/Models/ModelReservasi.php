@@ -20,6 +20,9 @@ class ModelReservasi extends Model
         'status_pembayaran',
         'id_kamar',
         'id_resepsionis',
+        'room_plan',
+        'request',
+        'reservation_by'
     ];
 
     public function kamar()
