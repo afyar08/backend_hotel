@@ -13,6 +13,7 @@ class ModelReservasi extends Model
     protected $fillable = [
         'tgl_check_in',
         'tgl_check_out',
+        'id_tamu',
         'detail_tamu',
         'pembayaran',
         'total_bayar',
@@ -31,5 +32,10 @@ class ModelReservasi extends Model
     public function resepsionis()
     {
         return $this->belongsTo(ModelReceptionist::class, 'id_resepsionis');
+    }
+
+    public function tamu()
+    {
+        return $this->belongsTo(ModelGuest::class, 'id_tamu');
     }
 }
