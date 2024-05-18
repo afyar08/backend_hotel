@@ -26,6 +26,9 @@ class ReservasiTableSeeder extends Seeder
                 'status_pembayaran' => 'Lunas',
                 'id_kamar' => rand(1, 30),
                 'id_resepsionis' => 1,
+                'room_plan' => null,
+                'request' => null,
+                'reservation_by'=>null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];

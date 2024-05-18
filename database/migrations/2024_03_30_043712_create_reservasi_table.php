@@ -23,6 +23,9 @@ return new class extends Migration
             $table->foreign('id_tamu')->references('id')->on('guests');
             $table->foreignId('id_kamar')->constrained('kamar');
             $table->foreignId('id_resepsionis')->nullable()->constrained('receptionists');
+            $table->string('room_plan')->nullable();
+            $table->string('request')->nullable();
+            $table->string('reservation_by')->nullable();
             $table->timestamps();
             
         });
