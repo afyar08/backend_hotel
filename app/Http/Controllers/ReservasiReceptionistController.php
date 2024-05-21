@@ -20,32 +20,28 @@ class ReservasiReceptionistController extends Controller
         return response()->json($reservasi);
     }
 
-    public function getReservationData()
+    public function getReservationData($id)
 {
-    // Ambil data reservasi beserta informasi kamar dan tipe kamar terkait
-    $reservations = ModelReservasi::with('kamar.tipeKamar')->get();
+    // Ambil data reservasi beserta informasi kamar, tipe kamar, dan tamu terkait
+    $reservation = ModelReservasi::with(['kamar.tipeKamar', 'tamu'])->findOrFail($id);
 
     // Format data sesuai kebutuhan
-    $formattedReservations = $reservations->map(function ($reservation) {
-        return [
-            'name' => $reservation->tamu->nama, // Ambil nama tamu dari relasi
-            'roomNumber' => $reservation->kamar->no_kamar, // Ambil nomor kamar dari relasi
-            'roomType' => $reservation->kamar->tipeKamar->nama_tipe, // Ambil nama tipe kamar dari relasi
-            'bookId' => $reservation->id, // Ambil ID reservasi
-            'status' => $reservation->kamar->status_reservasi, // Ambil status reservasi
-            'checkInDate' => $reservation->tgl_check_out, // Ambil tanggal check-in
-            'checkOutDate' => $reservation->tgl_check_in, // Ambil tanggal check-out
-        ];
-    });
+    $formattedReservation = [
+        'tgl_check_in' => $reservation->tgl_check_in,
+        'tgl_check_out' => $reservation->tgl_check_out,
+        'nama_tamu' => $reservation->tamu->nama,
+        'nama_tipe' => $reservation->kamar->tipeKamar->nama_tipe,
+        'room_plan' => $reservation->room_plan,
+        'status_reservasi' => $reservation->kamar->status_reservasi,
+        'no_kamar' => $reservation->kamar->no_kamar,
+        'reservation_by' => $reservation->reservation_by,
+        'request' => $reservation->request,
+    ];
 
     // Return data yang diformat
-    return response()->json($formattedReservations);
+    return response()->json($formattedReservation);
 }
 
-    public function show($id)
-    {
-        
-    }
 
     public function store(Request $request)
     {
@@ -66,6 +62,7 @@ class ReservasiReceptionistController extends Controller
         }
 
         $reservasi = ModelReservasi::create($request->all());
+        return response()->json($reservasi, 201);
         
     }
 
