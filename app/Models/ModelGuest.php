@@ -35,4 +35,8 @@ class ModelGuest extends Authenticatable
     {
         $this->attributes['password'] = $this->kategori === 'BP' ? null : $value;
     }
+    public function idTamuReservasi()
+    {
+        return $this->hasOne(ModelReservasi::class, 'id_tamu', 'id');
+    }
 }
