@@ -26,6 +26,12 @@ return new class extends Migration
             $table->string('room_plan')->nullable();
             $table->string('request')->nullable();
             $table->string('reservation_by')->nullable();
+            $table->string('duration')->nullable();
+            $table->integer('room_total')->nullable();
+            $table->integer('adult');
+            $table->integer('children')->nullable();
+            $table->decimal('extra', 10, 2)->nullable();
+            $table->decimal('sub_total', 10, 2)->nullable();
             $table->timestamps();
             
         });
