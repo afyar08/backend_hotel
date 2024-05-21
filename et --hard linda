@@ -1,0 +1,57 @@
+[33mb41b4a4[m[33m ([m[1;36mHEAD -> [m[1;32mlinda[m[33m, [m[1;31morigin/linda[m[33m)[m Merge branch 'main' of https://github.com/afyar08/backend_hotel into linda
+[33m4836053[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #13 from afyar08/alya
+[33m8107d98[m update tabel reservasi penyesuaian dengan guest detail
+[33m8262dfc[m Merge pull request #12 from afyar08/alya
+[33me12e5d5[m controller buat reservasi
+[33mae6fe97[m Merge branch 'main' of https://github.com/afyar08/backend_hotel into linda
+[33mf43c4de[m update controller tipe kamar
+[33m5347ef6[m add image tipe hotel & controller tipe_kamar
+[33mf479486[m penjelasanintegrasi
+[33m173ef70[m Merge pull request #11 from afyar08/alya
+[33m2ab7da8[m user seeder
+[33md9073e2[m Merge pull request #10 from afyar08/linda
+[33m5dee142[m ini udh diperbaiki yg kamar dan buat controller
+[33m88aacf6[m Merge pull request #9 from afyar08/alya
+[33m0856c45[m seeder kamar ama tipe kamar
+[33m5c43fef[m Merge pull request #8 from afyar08/linda
+[33m01f723d[m ini udh logout receptionist
+[33m4c7593f[m Merge pull request #7 from afyar08/alya
+[33mb248397[m coba konfigurasi email
+[33m028f7f3[m coba email konfiguration
+[33mdadefa7[m perbaikan auth
+[33ma06ed42[m authentikasi 2 role
+[33m2b8fb15[m nambahin sanctum
+[33m4d66cf0[m perbaiki validasi
+[33mc1459fd[m update tamu
+[33m9e9e0e5[m buat yang tamu controller login
+[33m4a64f53[m hapus lagi astaga
+[33m5a05801[m manager hapus lagi
+[33ma7daa31[m solve merge
+[33m9f986d4[m Merge branch 'main' into alya
+[33m722a146[m keperluan seeder
+[33m90f1aa1[m perbaiki reservasi
+[33m4eb8933[m hapus manager tambah tamu
+[33m2ecb391[m Merge pull request #6 from afyar08/linda
+[33mc4f3af5[m ini juga udh diintegrasi ges
+[33m2020fdb[m masih nyoba buat ngehubungin api dari frontdesk
+[33mbc6f899[m Merge branch 'main' of https://github.com/afyar08/backend_hotel into linda
+[33m2cc7a06[m manager registration terhubung
+[33m3561bf5[m integred ulang
+[33mf555d64[m crud akun manager
+[33m7a6066b[m Merge branch 'main' of https://github.com/afyar08/backend_hotel into linda
+[33mc556200[m Merge pull request #5 from afyar08/alya
+[33m9cafe09[m integrasi api.php dan provider
+[33mc49629b[m Merge branch 'main' of https://github.com/afyar08/backend_hotel into linda
+[33m3f78b0c[m[33m ([m[1;31morigin/alya[m[33m)[m fiksasi model dan migrasi
+[33m04191bf[m 'ubah user table menjadi semula'
+[33m38097ce[m Merge pull request #4 from afyar08/alya
+[33m4a84c82[m dummy
+[33mb11d605[m Merge pull request #3 from afyar08/alya
+[33m60778b4[m fiksasi model
+[33m61a321c[m Merge pull request #2 from afyar08/alya
+[33md61ccfe[m up no kamar lupa
+[33m7e60075[m Merge pull request #1 from afyar08/alya
+[33m7b8c2a0[m membuat model,menghubungkan db, buat migration untuk tabel tamu,kamar,tipe kamar, user baru tamu untuk manager dan admin belum di sambung authentikasinya
+[33m83054f9[m[33m ([m[1;31morigin/afyar[m[33m, [m[1;32mmain[m[33m)[m Resolve merge conflict in README.md
+[33mb46d2c9[m[33m ([m[1;31morigin/master[m[33m)[m backend-hotel
+[33m149f9d5[m Initial commit
