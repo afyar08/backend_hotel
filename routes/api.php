@@ -51,7 +51,8 @@ Route::get('/tipe_kamar', [TipeKamarController::class, 'get']);
 Route::get('/kamar', [KamarController::class, 'get']);
 
 Route::get('/all_reservasi', [ReservasiReceptionistController::class, 'index']);
-Route::get('/reservasi/{id}', [ReservasiReceptionistController::class, 'getReservationData']);
+Route::get('/reservasi', [ReservasiReceptionistController::class, 'getReservationData']);
+Route::get('/reservasi/{id}', [ReservasiReceptionistController::class, 'show']);
 Route::post('/reservasi', [ReservasiReceptionistController::class, 'store']);
 Route::put('/reservasi/{id}', [ReservasiReceptionistController::class, 'update']);
 Route::delete('/reservasi/{id}', [ReservasiReceptionistController::class, 'destroy']);

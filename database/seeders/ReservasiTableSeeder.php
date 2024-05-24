@@ -26,9 +26,15 @@ class ReservasiTableSeeder extends Seeder
                 'status_pembayaran' => 'Lunas',
                 'id_kamar' => rand(1, 30),
                 'id_resepsionis' => 1,
-                'room_plan' => null,
-                'request' => null,
-                'reservation_by'=>null,
+                'room_plan' => '-', // Memberikan nilai default berupa string kosong
+                'request' => '-', // Memberikan nilai default berupa string kosong
+                'reservation_by' => '-', // Memberikan nilai default berupa string kosong
+                'duration' => 0, // Memberikan nilai default berupa angka 0
+                'room_total' => 0, // Memberikan nilai default berupa angka 0
+                'adult' => 0, // Memberikan nilai default berupa angka 0
+                'children' => 0, // Memberikan nilai default berupa angka 0
+                'extra' => 0,
+                'sub_total' => 0,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
