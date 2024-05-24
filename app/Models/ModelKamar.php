@@ -20,6 +20,6 @@ class ModelKamar extends Model
     // dipindahin kesini kebalikkkk
     public function tipeKamar()
     {
-        return $this->belongsTo(ModelTipeKamar::class, 'tipe_kamar_id');
+        return $this->hasMany(ModelTipeKamar::class, 'id','tipe_kamar_id');
     }
 }

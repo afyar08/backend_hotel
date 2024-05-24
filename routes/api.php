@@ -39,12 +39,14 @@ Route::middleware('auth:receptionist')->group(function () {
     // Rute untuk resepsionis
 });
 
+//ini untuk autentikasi login dan logout receptionist
 Route::prefix('receptionist')->group(function () {
     Route::post('/create_receptionist', [ReceptionistController::class, 'create_akun']);
     Route::post('/auth_receptionist', [ReceptionistController::class, 'login']);
     Route::post('/logout_receptionist', [ReceptionistController::class, 'logout']);
 });
 
+//RUte buat mendapatkan data kamar yang sudah terrelasi dengan tipe kamar
 Route::get('/tipe_kamar', [TipeKamarController::class, 'get']);
 Route::get('/kamar', [KamarController::class, 'get']);
 
