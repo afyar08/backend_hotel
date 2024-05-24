@@ -69,4 +69,14 @@ public function show($id)
     return response()->json($formattedReservation);
 }
 
+
+    public function destroy($id)
+    {
+        $reservasi = ModelReservasi::findOrFail($id);
+        $reservasi->delete();
+        return response()->json(null, 204);
+    }
+
+    
+
 }
