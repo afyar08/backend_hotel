@@ -82,4 +82,6 @@ class ReservasiReceptionistController extends Controller
         $reservasi->delete();
         return response()->json(null, 204);
     }
+
+    
 }
