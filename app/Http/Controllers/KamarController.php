@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ModelKamar;
+use Illuminate\Support\Facades\Validator;
 
 class KamarController extends Controller
 {
@@ -13,4 +14,26 @@ class KamarController extends Controller
         $kamar = ModelKamar::with('tipeKamar')->get();
         return response()->json($kamar);
     }
+
+    public function updateRoomStatus(Request $request, $id)
+{
+    // Validate the request data
+    $validator = Validator::make($request->all(), [
+        'status_reservasi' => 'required|string',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['error' => $validator->errors()], 400);
+    }
+
+    // Find the room by ID
+    $kamar = ModelKamar::findOrFail($id);
+
+    // Update the room status
+    $kamar->status_reservasi = $request->input('status_reservasi');
+    $kamar->save();
+
+    return response()->json(['message' => 'Room status updated successfully']);
+}
+
 }
