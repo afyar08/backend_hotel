@@ -22,8 +22,8 @@ class ReservasiReceptionistController extends Controller
 
     public function getReservationData()
 {
-    // Ambil data reservasi beserta informasi kamar dan tipe kamar terkait
-    $reservations = ModelReservasi::with('kamar.tipeKamar')->get();
+    // Ambil data reservasi beserta informasi kamar, tipe kamar, dan tamu terkait
+    $reservations = ModelReservasi::with(['kamar.tipeKamar', 'tamu'])->get();
 
     // Format data sesuai kebutuhan
     $formattedReservations = $reservations->map(function ($reservation) {
@@ -42,46 +42,31 @@ class ReservasiReceptionistController extends Controller
     return response()->json($formattedReservations);
 }
 
-    public function show($id)
-    {
-        
+public function show($id)
+{
+    // Temukan data reservasi berdasarkan ID
+    $reservation = ModelReservasi::with(['kamar.tipeKamar', 'tamu'])->find($id);
+
+    // Jika data tidak ditemukan, kembalikan response 404
+    if (!$reservation) {
+        return response()->json(['error' => 'Reservasi tidak ditemukan'], 404);
     }
 
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'id_kamar' => 'required',
-            'id_tamu' => 'required',
-            'id_resepsionis' => 'required',
-            'tgl_check_in' => 'required',
-            'tgl_check_out' => 'required',
-            'total_bayar' => 'required',
-            'pembayaran' => 'required',
-            'status_pembayaran' => 'required',
-            'detail_tamu' => 'required',
-        ]);
+    // Format data reservasi
+    $formattedReservation = [
+        'room_plan' => $reservation->room_plan,
+        'reservation_by' => $reservation->reservation_by,
+        'request' => $reservation->request,
+        'duration' => $reservation->duration,
+        'room_total' => $reservation->room_total,
+        'adult' => $reservation->adult,
+        'children' => $reservation->children,
+        'extra' => $reservation->extra,
+        'sub_total' => $reservation->sub_total,
+    ];
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
-        }
+    // Return data yang diformat
+    return response()->json($formattedReservation);
+}
 
-        $reservasi = ModelReservasi::create($request->all());
-        
-    }
-
-    public function update(Request $request, $id)
-    {
-        $reservasi = ModelReservasi::findOrFail($id);
-        $reservasi->update($request->all());
-        
-    }
-
-    public function destroy($id)
-    {
-        $reservasi = ModelReservasi::findOrFail($id);
-        $reservasi->delete();
-        return response()->json(null, 204);
-    }
-
-    
 }
