@@ -27,12 +27,13 @@ use App\Http\Controllers\KamarController;
 // });
 
 Route::middleware('auth:guest')->group(function () {
-    Route::post('/logout', [GuestController::class, 'logout']);
+    // Rute untuk tamu
 });
 
 Route::prefix('guest')->group(function () {
     Route::post('/register', [GuestController::class, 'register']);
     Route::post('/login', [GuestController::class, 'login']);  
+    Route::post('/logout', [GuestController::class, 'logout']);
 });
 
 Route::middleware('auth:receptionist')->group(function () {
