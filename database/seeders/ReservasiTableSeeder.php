@@ -19,7 +19,7 @@ class ReservasiTableSeeder extends Seeder
             $reservasiData[] = [
                 'tgl_check_in' => now()->addDays($i),
                 'tgl_check_out' => now()->addDays($i + 1),
-                'id_tamu' => rand(1, 2),
+                'id_tamu' => rand(1, 6),
                 'detail_tamu' => 'Detail tamu ' . $i,
                 'pembayaran' => 'Cash',
                 'total_bayar' => rand(300000, 700000),

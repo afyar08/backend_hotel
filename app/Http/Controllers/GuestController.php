@@ -95,7 +95,4 @@ public function login(Request $request)
         return response()->json(['message' => 'Logout berhasil']);
     }
 
-    public function inHouseGuest(){
-        $guest = ModelGuest::where();
-    }
 }

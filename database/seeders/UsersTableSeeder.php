@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
         // Seeder untuk tabel guests
         DB::table('guests')->insert([
             'nama' => 'John Doe',
-            'email' => 'john@gmail.com',
+            'email' => 'johndul@gmail.com',
             'no_telp' => '1234567890',
             'kategori' => 'ON',
             'password' => Hash::make('password'),
@@ -30,10 +30,53 @@ class UsersTableSeeder extends Seeder
             'email' => 'jane@gmail.com',
             'no_telp' => '987654321',
             'kategori' => 'BP',
-            'password' => null,
+            'password' => Hash::make('password'),
             'confirmation_code' => 'DEF456', // Sesuaikan dengan kolom yang ada di database
             'confirmed_at' => now(),
         ]);
+
+        DB::table('guests')->insert([
+            'nama' => 'Michael Johnson',
+            'email' => 'michael@gmail.com',
+            'no_telp' => '5551234567',
+            'kategori' => 'BP',
+            'password' => Hash::make('michael123'),
+            'confirmation_code' => 'GHI789',
+            'confirmed_at' => now(),
+        ]);
+
+        DB::table('guests')->insert([
+            'nama' => 'Emily Anderson',
+            'email' => 'emily@gmail.com',
+            'no_telp' => '5559876543',
+            'kategori' => 'ON',
+            'password' => Hash::make('emily456'),
+            'confirmation_code' => 'JKL012',
+            'confirmed_at' => now(),
+        ]);
+
+
+        DB::table('guests')->insert([
+            'nama' => 'David Brown',
+            'email' => 'david@gmail.com',
+            'no_telp' => '5555555555',
+            'kategori' => 'ON',
+            'password' => Hash::make('david789'),
+            'confirmation_code' => 'MNO345',
+            'confirmed_at' => now(),
+        ]);
+
+        DB::table('guests')->insert([
+            'nama' => 'Linda Santika',
+            'email' => 'linda@gmail.com',
+            'no_telp' => '083896783162',
+            'kategori' => 'BP',
+            'password' => Hash::make('12345678'),
+            'confirmation_code' => 'PQR678',
+            'confirmed_at' => now(),
+        ]);
+
+
 
         // Seeder untuk tabel receptionists
         DB::table('receptionists')->insert([
