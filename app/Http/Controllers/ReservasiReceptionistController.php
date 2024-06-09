@@ -70,6 +70,27 @@ public function show($id)
     // Return data yang diformat
     return response()->json($formattedReservation);
 }
+    public function inHouseGuest(){
+    $guests = ModelReservasi::with(['kamar', 'tamu'])->get();
+    $guestData = [];
+
+    foreach ($guests as $guest) {
+        $guestInfo = [
+            'tamu' => $guest->tamu,
+            'kamar' => $guest->kamar,
+            'tipe_kamar' => $guest->kamar->tipeKamar,
+            'status_reservasi' => $guest->kamar->status_reservasi
+        ];
+        if ($guestInfo['status_reservasi'] == 'reserved' || $guestInfo['status_reservasi'] == 'check in' ) {
+            
+            $guestData[] = $guestInfo;
+        }
+
+        
+    }
+
+    return response()->json($guestData);
+}
 
 
     public function destroy($id)
