@@ -49,6 +49,10 @@ Route::prefix('receptionist')->group(function () {
 //RUte buat mendapatkan data kamar yang sudah terrelasi dengan tipe kamar
 Route::get('/tipe_kamar', [TipeKamarController::class, 'get']);
 Route::get('/kamar', [KamarController::class, 'get']);
+Route::put('/kamar/status/{id}', [KamarController::class, 'updateRoomStatus']);
+Route::put('/kamar/r-status/{id}', [KamarController::class, 'updateRoomReserve']);
+Route::put('kamar/out-of-order/{id}', [KamarController::class, 'handleOutOfOrder']);
+
 
 Route::get('/all_reservasi', [ReservasiReceptionistController::class, 'index']);
 Route::get('/reservasi', [ReservasiReceptionistController::class, 'getReservationData']);

@@ -7,7 +7,7 @@ use App\Models\ModelReservasi;
 use App\Models\ModelGuest;
 use App\Models\ModelKamar;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+
 
 class ReservasiReceptionistController extends Controller
 {
@@ -33,8 +33,9 @@ class ReservasiReceptionistController extends Controller
             'roomType' => $reservation->kamar->tipeKamar->nama_tipe, // Ambil nama tipe kamar dari relasi
             'bookId' => $reservation->id, // Ambil ID reservasi
             'status' => $reservation->kamar->status_reservasi, // Ambil status reservasi
-            'checkInDate' => $reservation->tgl_check_out, // Ambil tanggal check-in
-            'checkOutDate' => $reservation->tgl_check_in, // Ambil tanggal check-out
+            'checkInDate' => $reservation->tgl_check_in, // Ambil tanggal check-in
+            'checkOutDate' => $reservation->tgl_check_out, // Ambil tanggal check-out
+            'roomTypeImage' => $reservation->kamar->tipeKamar->gambar,
         ];
     });
 
@@ -63,6 +64,7 @@ public function show($id)
         'children' => $reservation->children,
         'extra' => $reservation->extra,
         'sub_total' => $reservation->sub_total,
+        'harga_per_kamar' => $reservation->kamar->harga,
     ];
 
     // Return data yang diformat
@@ -90,5 +92,14 @@ public function show($id)
     return response()->json($guestData);
 }
 
+
+    public function destroy($id)
+    {
+        $reservasi = ModelReservasi::findOrFail($id);
+        $reservasi->delete();
+        return response()->json(null, 204);
+    }
+
+    
 
 }
