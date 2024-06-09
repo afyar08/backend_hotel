@@ -60,3 +60,5 @@ Route::get('/reservasi/{id}', [ReservasiReceptionistController::class, 'show']);
 Route::post('/reservasi', [ReservasiReceptionistController::class, 'store']);
 Route::put('/reservasi/{id}', [ReservasiReceptionistController::class, 'update']);
 Route::delete('/reservasi/{id}', [ReservasiReceptionistController::class, 'destroy']);
+
+Route::get('/inHouseGuest', [ReservasiReceptionistController::class, 'inHouseGuest']);
