@@ -23,4 +23,9 @@ class ModelReceptionist extends Authenticatable
         'remember_token',
     ];
 
+    public function reservasis()
+    {
+        return $this->hasMany(ModelReservasi::class, 'id_resepsionis', 'id');
+    }
+
 }
