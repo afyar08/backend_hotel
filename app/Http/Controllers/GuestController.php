@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Models\ModelGuest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
+
 
 
 class GuestController extends Controller
@@ -55,42 +57,39 @@ public function register(Request $request)
     }
 }
 
-    // Login guest
-// Login guest
 public function login(Request $request)
-{
-    try {
-        // Validasi input dari request
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string',
-        ]);
+    {
+        try {
+            // Validasi input dari request
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required|string',
+            ]);
 
-        // Catat data yang diterima
-        Log::info('Data yang diterima untuk login:', $request->only('email', 'password'));
-
-        // Lakukan autentikasi menggunakan guard 'guest'
-        if (Auth::guard('guest')->attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Login berhasil', 'user' => auth()->guard('guest')->user()]);
-        } else {
-            // Jika login gagal, catat pesan gagal login
-            Log::info('Login gagal untuk email: ' . $request->email);
-            return response()->json(['message' => 'Login gagal'], 401);
+            // Lakukan autentikasi menggunakan guard 'guest'
+            if (Auth::guard('guest')->attempt($request->only('email', 'password'))) {
+                // Jika autentikasi berhasil, ambil informasi pengguna
+                $guest = Auth::guard('guest')->user();
+                
+                // Buat token acak untuk pengguna yang berhasil login
+                $token = Str::random(60);
+                
+                // Kirim respons JSON dengan token dan status HTTP 200 (OK)
+                return response()->json(['message' => 'Login berhasil', 'token' => $token]);
+            } else {
+                // Jika autentikasi gagal, kirim respons JSON dengan pesan kesalahan dan status HTTP 401 (Unauthorized)
+                return response()->json(['message' => 'Kombinasi email dan password salah'], 401);
+            }
+        } catch (\Exception $e) {
+            // Tangani kesalahan umum
+            return response()->json(['message' => 'Terjadi kesalahan saat login', 'error' => $e->getMessage()], 500);
         }
-    } catch (\Exception $e) {
-        // Tangani kesalahan umum
-        Log::error('Terjadi kesalahan saat login: ' . $e->getMessage());
-        return response()->json(['message' => 'Terjadi kesalahan saat login'], 500);
     }
-}
-
-
-
     // Logout guest
     public function logout(Request $request)
     {
         // Lakukan logout
-        auth()->logout();
+        Auth::guard('guest')->logout();
 
         return response()->json(['message' => 'Logout berhasil']);
     }
