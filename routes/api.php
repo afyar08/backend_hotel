@@ -57,7 +57,7 @@ Route::put('kamar/out-of-order/{id}', [KamarController::class, 'handleOutOfOrder
 Route::get('/all_reservasi', [ReservasiReceptionistController::class, 'index']);
 Route::get('/reservasi', [ReservasiReceptionistController::class, 'getReservationData']);
 Route::get('/reservasi/{id}', [ReservasiReceptionistController::class, 'show']);
-Route::post('/reservasi', [ReservasiReceptionistController::class, 'store']);
+Route::post('/reservasi', [ReservasiReceptionistController::class, 'createReservation']);
 Route::put('/reservasi/{id}', [ReservasiReceptionistController::class, 'update']);
 Route::delete('/reservasi/{id}', [ReservasiReceptionistController::class, 'destroy']);
 
