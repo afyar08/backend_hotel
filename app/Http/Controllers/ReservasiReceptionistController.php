@@ -7,6 +7,8 @@ use App\Models\ModelReservasi;
 use App\Models\ModelGuest;
 use App\Models\ModelKamar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 
 class ReservasiReceptionistController extends Controller
@@ -100,6 +102,62 @@ public function show($id)
         return response()->json(null, 204);
     }
 
+    public function createReservation(Request $request)
+    {
+        DB::beginTransaction();
     
-
+        try {
+            // Log request data for debugging
+            \Log::debug('Request data:', $request->all());
+    
+            // Membuat guest baru
+            $guest = ModelGuest::create([
+                'nama' => $request->input('title') . ' ' . $request->input('first_name') . ' ' . $request->input('last_name'),
+                'email' => $request->input('email'),
+                'no_telp' => $request->input('no_telp'),
+                'kategori' => 'BP',  // Anda bisa mengatur kategori sesuai kebutuhan
+            ]);
+    
+            // Log guest data for debugging
+            \Log::debug('Guest created:', $guest->toArray());
+    
+            // Membuat reservasi baru
+            $reservation = ModelReservasi::create([
+                'tgl_check_in' => $request->input('tgl_check_in'),
+                'tgl_check_out' => $request->input('tgl_check_out'),
+                'duration' => $request->input('duration'),
+                'id_tamu' => $guest->id,
+                'detail_tamu' => $guest->nama, // Adding detail_tamu
+                'pembayaran' => $request->input('pembayaran'),
+                'total_bayar' => $request->input('total_bayar'),
+                'status_pembayaran' => $request->input('status_pembayaran'),
+                'id_kamar' => $request->input('id_kamar'),
+                'id_resepsionis' => $request->input('id_resepsionis'),
+                'room_plan' => $request->input('room_plan'),
+                'request' => $request->input('request'),
+                'reservation_by' => $request->input('reservation_by'),
+                'room_total' => $request->input('room_total'),
+                'adult' => $request->input('adult'),
+                'children' => $request->input('children'),
+                'extra' => $request->input('extra'),
+                'sub_total' => $request->input('sub_total'),
+            ]);
+    
+            DB::commit();
+    
+            return response()->json(['message' => 'Reservation created successfully', 'reservation' => $reservation], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+    
+            // Log the error message
+            \Log::error('Failed to create reservation: ' . $e->getMessage());
+    
+            // Print the stack trace to the log
+            \Log::error($e->getTraceAsString());
+    
+            return response()->json(['message' => 'Failed to create reservation', 'error' => $e->getMessage()], 500);
+        }
+    }
+    
+    
 }
